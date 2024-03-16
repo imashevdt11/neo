@@ -21,3 +21,17 @@ CREATE TABLE OrderProduct (
     product_id INT,
     quantity INT
 );
+ALTER TABLE Orders
+    ADD CONSTRAINT fk_customer_id
+        FOREIGN KEY (customer_id)
+            REFERENCES Customer(id);
+
+ALTER TABLE OrderProduct
+    ADD CONSTRAINT fk_order_id
+        FOREIGN KEY (order_id)
+            REFERENCES Orders(id);
+
+ALTER TABLE OrderProduct
+    ADD CONSTRAINT fk_product_id
+        FOREIGN KEY (product_id)
+            REFERENCES Product(id);
