@@ -1,0 +1,56 @@
+1. GET /api/products
+
+All records from the table have been displayed (200 OK)
+
+
+
+2. GET /api/products/*
+
+/api/products/1 -> The record was displayed (200 OK)
+/api/products/7 -> The record wasn't displayed (500 Internal Server Error)
+
+
+
+3. POST /api/products
+
+Body:
+{
+    "name": "jeans",
+    "price": 99.7
+}
+An entry has been added (201 Created)
+
+
+
+4. PUT /api/products/*
+
+/api/products/1
+
+    Body:
+    {
+        "name": "hockey mask",
+        "price": 44.4
+    }
+    Result:
+    {
+        "id": 1,
+        "name": "hockey mask",
+        "price": 44.4
+    }
+    The record was changed (200 OK)
+
+/api/products/7
+
+    Body:
+        {
+            "name": "hockey mask",
+            "price": 44.4
+        }
+        The record wasn't found (404 Not Found)
+
+
+
+5. DELETE /api/products/*
+
+/api/products/1 -> The record has been deleted (204 No Content)
+/api/products/7 -> The record hasn't been deleted, because the record was not exist (204 No Content)
