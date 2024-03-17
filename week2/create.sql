@@ -35,4 +35,3 @@ ALTER TABLE OrderProduct
     ADD CONSTRAINT fk_product_id
         FOREIGN KEY (product_id)
             REFERENCES Product(id);
-
