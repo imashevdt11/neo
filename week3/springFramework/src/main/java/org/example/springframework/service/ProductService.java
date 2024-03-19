@@ -28,12 +28,10 @@ public class ProductService {
     }
 
     public Product updateProduct(Long id, Product updatedProduct) {
-        Optional<Product> existingProductOptional = getProductById(id);
-        if (existingProductOptional.isEmpty()) {
+        Product existingProduct = getProductById(id);
+        if (existingProduct == null) {
             throw new ProductNotFoundException("Product not found with id: " + id);
         }
-
-        Product existingProduct = existingProductOptional.get();
         existingProduct.setName(updatedProduct.getName());
         existingProduct.setPrice(updatedProduct.getPrice());
 
