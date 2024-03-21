@@ -1,23 +1,25 @@
 package org.example.springframework.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "customer")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "BIGINT")
-    private Long id;
-    private String name;
-    private String phoneNumber;
+    Long id;
 
-    public Customer() {}
+    @Column(nullable = false)
+    String name;
 
-    public Customer(String name, String phoneNumber) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-    }
+    @Column(nullable = false)
+    String phoneNumber;
 }
