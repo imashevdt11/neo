@@ -1,25 +1,24 @@
 package org.example.springframework.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Table(name = "orders")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "BIGINT")
-    private Long id;
+    Long id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    public Orders() {
-    }
-
-    public Orders(Customer customer) {
-        this.customer = customer;
-    }
+    @JoinColumn(name = "customer_id", nullable = false)
+    Customer customer;
 }
