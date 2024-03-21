@@ -8,7 +8,6 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Table(name = "product")
 @FieldDefaults(level = AccessLevel.PRIVATE)
