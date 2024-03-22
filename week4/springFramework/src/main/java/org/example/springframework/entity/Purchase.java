@@ -9,17 +9,17 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "orderproduct")
+@Table(name = "purchase")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class OrderProduct {
+public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "BIGINT")
     Long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    Orders order;
+    @JoinColumn(name = "customer_id", nullable = false)
+    Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
