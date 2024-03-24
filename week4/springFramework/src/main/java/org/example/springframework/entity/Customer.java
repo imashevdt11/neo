@@ -20,6 +20,6 @@ public class Customer {
     @Column(nullable = false)
     String name;
 
-    @Column(name = "phoneNumber", nullable = false)
-    String phoneNumber;
+    @Column(nullable = false)
+    String phone_number;
 }
