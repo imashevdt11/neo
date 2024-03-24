@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO addCustomer(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setName(customerDTO.getName());
-        customer.setPhoneNumber(customerDTO.getPhoneNumber());
+        customer.setPhone_number(customerDTO.getPhone_number());
         Customer savedCustomer = repo.save(customer);
         return convertToCustomerDTO(savedCustomer);
     }
@@ -45,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         existingCustomerDTO.setName(customerDTO.getName());
-        existingCustomerDTO.setPhoneNumber(customerDTO.getPhoneNumber());
+        existingCustomerDTO.setPhone_number(customerDTO.getPhone_number());
 
         Customer updatedCustomer = repo.save(convertToCustomerEntity(existingCustomerDTO));
 
@@ -60,7 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setId(customer.getId());
         customerDTO.setName(customer.getName());
-        customerDTO.setPhoneNumber(customer.getPhoneNumber());
+        customerDTO.setPhone_number(customer.getPhone_number());
         return customerDTO;
     }
 
@@ -68,7 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = new Customer();
         customer.setId(customerDTO.getId());
         customer.setName(customerDTO.getName());
-        customer.setPhoneNumber(customerDTO.getPhoneNumber());
+        customer.setPhone_number(customerDTO.getPhone_number());
         return customer;
     }
 }
