@@ -1,7 +1,9 @@
 package org.example.springframework.exception;
 
-public class PurchaseNotFoundException extends RuntimeException{
-    public PurchaseNotFoundException(String message) {
-        super(message);
+import org.springframework.http.HttpStatus;
+
+public class PurchaseNotFoundException extends BaseException{
+    public PurchaseNotFoundException(String message, HttpStatus status) {
+        super(message, status);
     }
 }

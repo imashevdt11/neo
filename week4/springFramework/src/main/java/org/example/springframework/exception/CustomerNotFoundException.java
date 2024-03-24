@@ -1,7 +1,9 @@
 package org.example.springframework.exception;
 
-public class CustomerNotFoundException extends RuntimeException {
-    public CustomerNotFoundException(String message) {
-        super(message);
+import org.springframework.http.HttpStatus;
+
+public class CustomerNotFoundException extends BaseException {
+    public CustomerNotFoundException(String message, HttpStatus status) {
+        super(message, status);
     }
 }
