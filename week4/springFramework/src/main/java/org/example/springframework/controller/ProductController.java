@@ -32,6 +32,24 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
+    @GetMapping("/price/{price}")
+    public ResponseEntity<List<ProductDTO>> getProductsByPrice(@PathVariable Double price) {
+        List<ProductDTO> productList = productService.getProductsByPrice(price);
+        return ResponseEntity.ok(productList);
+    }
+
+    @GetMapping("/price/below/{price}")
+    public ResponseEntity<List<ProductDTO>> getProductsBelowPrice(@PathVariable Double price) {
+        List<ProductDTO> productList = productService.getProductsBelowPrice(price);
+        return ResponseEntity.ok(productList);
+    }
+
+    @GetMapping("/price/above/{price}")
+    public ResponseEntity<List<ProductDTO>> getProductsAbovePrice(@PathVariable Double price) {
+        List<ProductDTO> productList = productService.getProductsAbovePrice(price);
+        return ResponseEntity.ok(productList);
+    }
+
     @PostMapping
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO product) {
         ProductDTO addedProduct = productService.addProduct(product);

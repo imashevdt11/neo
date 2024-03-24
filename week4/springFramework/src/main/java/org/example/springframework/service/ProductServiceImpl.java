@@ -30,6 +30,21 @@ public class ProductServiceImpl implements ProductService {
         return convertToProductDTO(product);
     }
 
+    public List<ProductDTO> getProductsByPrice(Double price) {
+        List<Product> productList = repo.findProductsByPrice(price);
+        return productList.stream().map(this::convertToProductDTO).toList();
+    }
+
+    public List<ProductDTO> getProductsBelowPrice(Double price) {
+        List<Product> productList = repo.findProductsByPriceIsLessThan(price);
+        return productList.stream().map(this::convertToProductDTO).toList();
+    }
+
+    public List<ProductDTO> getProductsAbovePrice(Double price) {
+        List<Product> productList = repo.findProductsByPriceIsGreaterThan(price);
+        return productList.stream().map(this::convertToProductDTO).toList();
+    }
+
     public ProductDTO addProduct(ProductDTO productDTO) {
         Product product = new Product();
         product.setName(productDTO.getName());
