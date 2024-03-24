@@ -11,5 +11,5 @@ import lombok.experimental.FieldDefaults;
 public class CustomerDTO {
     Long id;
     String name;
-    String phoneNumber;
+    String phone_number;
 }

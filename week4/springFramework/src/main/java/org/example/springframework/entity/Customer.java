@@ -21,5 +21,5 @@ public class Customer {
     String name;
 
     @Column(nullable = false)
-    String phoneNumber;
+    String phone_number;
 }

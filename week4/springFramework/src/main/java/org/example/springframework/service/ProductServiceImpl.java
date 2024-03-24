@@ -7,6 +7,7 @@ import org.example.springframework.dto.ProductDTO;
 import org.example.springframework.entity.Product;
 import org.example.springframework.exception.ProductNotFoundException;
 import org.example.springframework.repository.ProductRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     public ProductDTO getProductById(Long id) {
         Product product = repo.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
+                .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id, HttpStatus.NOT_FOUND));
 
         return convertToProductDTO(product);
     }
@@ -40,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
         ProductDTO existingProductDTO = getProductById(id);
         if (existingProductDTO == null) {
-            throw new ProductNotFoundException("Product not found with id: " + id);
+            throw new ProductNotFoundException("Product not found with id: " + id, HttpStatus.NOT_FOUND);
         }
 
         existingProductDTO.setName(productDTO.getName());

@@ -7,6 +7,7 @@ import org.example.springframework.dto.CustomerDTO;
 import org.example.springframework.entity.Customer;
 import org.example.springframework.exception.CustomerNotFoundException;
 import org.example.springframework.repository.CustomerRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     public CustomerDTO getCustomerById(Long id) {
         Customer customer = repo.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id: " + id));
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id: " + id, HttpStatus.NOT_FOUND));
 
         return convertToCustomerDTO(customer);
     }
@@ -40,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO) {
         CustomerDTO existingCustomerDTO = getCustomerById(id);
         if (existingCustomerDTO == null) {
-            throw new CustomerNotFoundException("Customer not found with id: " + id);
+            throw new CustomerNotFoundException("Customer not found with id: " + id, HttpStatus.NOT_FOUND);
         }
 
         existingCustomerDTO.setName(customerDTO.getName());
