@@ -1,6 +1,8 @@
 package org.example.springframework.controller;
 
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -8,6 +10,8 @@ import org.example.springframework.dto.ProductDTO;
 import org.example.springframework.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/api/products")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Validated
 public class ProductController {
 
     ProductService productService;
@@ -51,13 +56,21 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO product) {
+    public ResponseEntity<Object> addProduct(@Valid @RequestBody ProductDTO product, BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body("Validation error: " + result.getAllErrors());
+        }
         ProductDTO addedProduct = productService.addProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedProduct);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<Object> updateProduct(@PathVariable @Positive Long id,
+                                                @Valid @RequestBody ProductDTO productDTO,
+                                                BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body("Validation error: " + result.getAllErrors());
+        }
         ProductDTO savedProduct = productService.updateProduct(id, productDTO);
         return ResponseEntity.ok(savedProduct);
     }
