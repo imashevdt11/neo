@@ -9,6 +9,12 @@ public interface ProductService {
 
     ProductDTO getProductById(Long id);
 
+    List<ProductDTO> getProductsByPrice(Double price);
+
+    List<ProductDTO> getProductsBelowPrice(Double price);
+
+    List<ProductDTO> getProductsAbovePrice(Double price);
+
     ProductDTO addProduct(ProductDTO productDTO);
 
     ProductDTO updateProduct(Long id, ProductDTO productDTO);

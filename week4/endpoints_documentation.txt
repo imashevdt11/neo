@@ -1,0 +1,114 @@
+PRODUCT'S ENDPOINTS
+
+1. getAllProducts() - displaying all products from the database
+
+Request: GET /api/products
+Result: All records from the table have been displayed
+Status: 200 OK
+
+2. getProductById() - displaying information about product with specified id
+
+GET /api/products/{id}
+
+	Request: GET /api/products/2 (existing id)
+	Result: 
+	{
+    	     "id": 2,
+    	     "name": "hockey mask",
+    	     "price": 44.2
+	}
+	Status: 200 OK
+
+	Request: GET /api/products/4 (not existing id)
+	Result: Product Exception: Product not found with id: 1
+	Status: 404 Not Found
+
+3. getProductsByPrice() - displaying all products with specified price
+
+GET /api/products/price/{price}
+
+	Request: GET /api/products/price/44.2 (existing price)
+	Result: All records from the table with price 44.2 have been displayed
+	Status: 200 OK
+
+	Request: GET /api/products/price/43.2 (not existing price)
+        Result: Nothing has been displayed
+        Status: 200 OK
+
+4. getProductsBelowPrice() - displaying all products with a price lower than the specified one
+
+GET /api/products/price/below/{price}
+
+	Request: GET /api/products/price/below/44.5 (products with lower price exist)
+        Result: All records from the table with a price lower than 44.5 have been displaye 
+        Status: 200 OK
+
+        Request: GET /api/products/price/below/43.2 (products with lower price doesn't exist)
+        Result: Nothing has been displayed
+        Status: 200 OK
+
+5. getProductsAbovePrice() - displaying all products with a price upper than the specified one>
+
+GET /api/products/price/above/{price}
+
+        Request: GET /api/products/price/above/42.5 (products with upper price exist>
+        Result: All records from the table with a price upper than 42.5 have been displayed>
+        Status: 200 OK
+
+        Request: GET /api/products/price/aboe/47.2 (products with upper price doesn't exist>
+        Result: Nothing has been displayed
+        Status: 200 OK
+
+6. addProduct() - adding product to the database
+
+POST /api/products/
+
+Body:
+{
+    "name": "blade",
+    "price": 43.0
+}
+Result: An entry has been added 
+Status: 201 Created
+
+
+7. updateProduct() - updating product in the database
+
+PUT /api/products/{id}
+
+	Request: PUT /api/products/2 (existing id)
+	Body:
+    	{
+        	"name": "hockey mask",
+        	"price": 44.6
+    	}
+    	Result:
+    	{
+        	"id": 1,
+        	"name": "hockey mask",
+        	"price": 44.6
+    	}
+    	The record was changed 
+	Status: 200 OK
+
+	Request: PUT /api/products/7 (not existing id)
+	Body:
+        {
+            "name": "hockey mask",
+            "price": 44.4
+        }
+        Result: Product Exception: Product not found with id: 7
+	Status: 404 Not Found
+
+
+8. deleteProduct() - removing product with specified id from the database
+
+DELETE /api/products/{id}
+
+	Request: DELETE /api/products/2 (existing id) 
+	Result: The record has been deleted 
+	Status: 204 No Content
+
+	Request: DELETE /api/products/7
+        Result: The record hasn't been deleted
+        Status: 204 No Content
