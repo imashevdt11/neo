@@ -63,13 +63,41 @@ GET /api/products/price/above/{price}
 
 POST /api/products/
 
-Body:
-{
-    "name": "blade",
-    "price": 43.0
-}
-Result: An entry has been added 
-Status: 201 Created
+	Body with valid data
+	Body:
+	{
+    	     "name": "blade",
+             "price": 43.0
+	}
+	Result: An entry has been added 
+	Status: 201 Created
+
+	Body with name's length smaller than 3
+	Body: 
+	{
+             "name": "bl",
+             "price": 43.0
+        }
+        Result: addProduct.productDTO.name: size must be between 3 and 51
+        Status: 404 Bad Request
+
+	Body with price equals or lower than 0
+        Body:
+        {
+             "name": "hockey",
+             "price": 0
+        }
+        Result: addProduct.productDTO.price: Price must be greater than zero
+        Status: 404 Bad Request
+
+	Body with invalid data
+	Body:
+        {
+             "name": "ho",
+             "price": 0
+        }
+        Result: addProduct.productDTO.price: Price must be greater than zero, addProduct.productDTO.name: size must be between 3 and 51
+        Status: 404 Bad Request
 
 
 7. updateProduct() - updating product in the database
@@ -99,8 +127,48 @@ PUT /api/products/{id}
         }
         Result: Product Exception: Product not found with id: 7
 	Status: 404 Not Found
+	
+				
+	
+			REQUEST: PUT /api/products/2 (EXISTING ID)
+	
+	Body with valid data
+        Body:
+        {
+             "name": "blade",
+             "price": 43.0
+        }
+        Result: Product has been updated
+        Status: 200 OK
 
+        Body with name's length smaller than 3
+        Body:
+        {
+             "name": "bl",
+             "price": 43.0
+        }
+        Result: updateProduct.productDTO.name: size must be between 3 and 51
+        Status: 404 Bad Request
 
+        Body with price equals or lower than 0
+	Body:
+        {
+             "name": "hockey",
+             "price": 0
+        }
+        Result: updateProduct.productDTO.price: Price must be greater than zero
+        Status: 404 Bad Request
+
+        Body with invalid data
+        Body:
+        {
+             "name": "ho",
+             "price": 0
+        }
+        Result: updateProduct.productDTO.price: Price must be greater than zero, updateProduct.productDTO.name: size must be between 3 and 51
+        Status: 404 Bad Request
+
+	
 8. deleteProduct() - removing product with specified id from the database
 
 DELETE /api/products/{id}
