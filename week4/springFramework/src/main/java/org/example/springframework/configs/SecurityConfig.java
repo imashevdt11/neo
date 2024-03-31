@@ -11,10 +11,11 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Setter
 @EnableWebSecurity
@@ -26,14 +27,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.disable())
-                .authorizeRequests(auth -> auth
-                        .requestMatchers("/api/user/registration").permitAll()
-                        .requestMatchers("/api/products/**").authenticated()
-                        .anyRequest().permitAll())
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http.cors(Customizer.withDefaults());
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.authorizeRequests(auth -> auth
+                        .requestMatchers(new AntPathRequestMatcher("/api/user/registration")).permitAll()
+                        .anyRequest().authenticated());
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
     @Bean
