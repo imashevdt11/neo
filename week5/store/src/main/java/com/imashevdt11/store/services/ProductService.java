@@ -1,23 +1,21 @@
-package com.imashevdt11.store.services.product;
+package com.imashevdt11.store.services;
 
 import com.imashevdt11.store.dtos.ProductDto;
 import com.imashevdt11.store.entities.Product;
 import com.imashevdt11.store.exceptions.ProductException;
 import com.imashevdt11.store.repositories.ProductRepository;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ProductServiceImpl implements ProductService {
+public class ProductService {
 
-    ProductRepository repo;
+    private final ProductRepository repo;
 
     public List<ProductDto> getAllProducts() {
         List<Product> productList = repo.findAll();
@@ -31,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public List<ProductDto> getProductsByPrice(Double price) {
-        List<Product> productList = repo.findProductsByPrice(price);
+        List<Product> productList = repo.findByPrice(price);
 
         if (productList.isEmpty()) {
             throw new ProductException("Products with a price equal to " + price + " not found", HttpStatus.NOT_FOUND.value());
@@ -55,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         return productList.stream().map(this::convertToProductDto).toList();
     }
 
-    public ProductDto addProduct(ProductDto productDto) {
+    public ProductDto createProduct(ProductDto productDto) {
         Product product = new Product();
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
@@ -78,7 +76,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void deleteProductById(Long id) {
-        repo.deleteById(id);
+        Optional<Product> optionalProduct = repo.findById(id);
+        if (optionalProduct.isPresent()) {
+            repo.deleteById(id);
+        } else {
+            throw new ProductException("Product not found with id: " + id, HttpStatus.NOT_FOUND.value());
+        }
     }
 
     private ProductDto convertToProductDto(Product product) {

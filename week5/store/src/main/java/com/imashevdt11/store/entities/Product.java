@@ -1,26 +1,33 @@
 package com.imashevdt11.store.entities;
 
-import jakarta.persistence.*;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Entity
 @Table(name = "products")
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "BIGINT")
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    String name;
+    private String name;
 
     @Column(nullable = false)
-    Double price;
+    private Double price;
 }
