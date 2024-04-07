@@ -1,5 +1,6 @@
 package com.imashevdt11.store.controllers;
 
+import com.imashevdt11.store.commons.EndpointConstants;
 import com.imashevdt11.store.dtos.auth.AuthenticationRequest;
 import com.imashevdt11.store.dtos.auth.AuthenticationResponse;
 import com.imashevdt11.store.dtos.auth.RegistrationRequest;
@@ -13,23 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/auth")
+@RequestMapping(EndpointConstants.AUTH_ENDPOINT)
 public class AuthenticationController {
 
     private final AuthenticationService service;
 
-    @PostMapping("/authentication")
+    @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authentication(@RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(service.authenticate(request));
     }
 
-    @PostMapping("/user_registration")
-    public ResponseEntity<AuthenticationResponse> userRegistration(@RequestBody RegistrationRequest request) {
+    @PostMapping("/register/user")
+    public ResponseEntity<AuthenticationResponse> registerUser(@RequestBody RegistrationRequest request) {
         return ResponseEntity.ok(service.registerUser(request));
     }
 
-    @PostMapping("/admin_registration")
-    public ResponseEntity<AuthenticationResponse> adminRegistration(@RequestBody RegistrationRequest request) {
+    @PostMapping("/register/admin")
+    public ResponseEntity<AuthenticationResponse> registerAdmin(@RequestBody RegistrationRequest request) {
         return ResponseEntity.ok(service.registerAdmin(request));
     }
 }

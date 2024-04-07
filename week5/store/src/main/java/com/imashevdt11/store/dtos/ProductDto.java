@@ -4,22 +4,23 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class ProductDto {
-    Long id;
+    private Long id;
 
     @NotBlank(message = "Name is required")
     @Size(min = 3, max = 51)
-    String name;
+    private String name;
 
     @NotNull(message = "Price is required")
     @Positive(message = "Price must be greater than zero")
-    Double price;
+    private Double price;
 }

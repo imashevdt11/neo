@@ -1,5 +1,6 @@
 package com.imashevdt11.store.configs;
 
+import com.imashevdt11.store.commons.EndpointConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +19,6 @@ import static com.imashevdt11.store.entities.auth.Role.*;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private static final String[] WHITE_LIST_URL = {
-            "/api/v1/auth/user_registration",
-            "/api/v1/auth/authentication"
-    };
-
     private final JwtAuthenticationFilter jwtAuthFilter;
 
     @Bean
@@ -31,7 +27,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers(WHITE_LIST_URL).permitAll()
+                        .requestMatchers(EndpointConstants.WHITE_LIST_URL).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/products/**").hasAnyAuthority(ADMIN.name(), USER.name())
                         .anyRequest().hasAuthority(ADMIN.name())
                 )
