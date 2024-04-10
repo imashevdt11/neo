@@ -1,6 +1,6 @@
 package com.imashevdt11.store.dtos.auth;
 
-import com.imashevdt11.store.entities.auth.Role;
+import com.imashevdt11.store.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

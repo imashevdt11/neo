@@ -1,6 +1,6 @@
 package com.imashevdt11.store.repositories;
 
-import com.imashevdt11.store.entities.auth.User;
+import com.imashevdt11.store.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
