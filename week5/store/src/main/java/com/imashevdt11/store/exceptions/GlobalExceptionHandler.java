@@ -16,18 +16,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(ProductException.class)
+    @ExceptionHandler(ProductNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ErrorResponse handleProductException(ProductException ex) {
-        logger.error("Product Exception: ({})", ex.getMessage());
+    public ErrorResponse handleProductException(ProductNotFoundException ex) {
+        logger.error("ProductNotFoundException: ({})", ex.getMessage());
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllExceptions(Exception ex) {
         logger.error("Internal Server Error: {}", ex.getMessage());
-        return new ResponseEntity<>(new BaseException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error"),
+        return new ResponseEntity<>(new BaseException("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR.value()),
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
