@@ -9,7 +9,7 @@ public class BaseException extends RuntimeException {
 
     private Integer status;
 
-    public BaseException(Integer status, String message) {
+    public BaseException(String message, Integer status) {
         super(message);
         this.status = status;
     }
