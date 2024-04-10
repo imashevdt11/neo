@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(EndpointConstants.WHITE_LIST_URL).permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/products/**").hasAnyAuthority(ADMIN.name(), USER.name())
+                        .requestMatchers(HttpMethod.GET, EndpointConstants.PRODUCTS_ENDPOINT + "/**").hasAnyAuthority(ADMIN.name(), USER.name())
                         .anyRequest().hasAuthority(ADMIN.name())
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

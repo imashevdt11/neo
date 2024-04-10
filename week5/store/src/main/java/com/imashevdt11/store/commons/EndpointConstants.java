@@ -10,10 +10,9 @@ public final class EndpointConstants {
     public static final String AUTH_ENDPOINT = API_PREFIX + "/auth";
 
     public static final String[] WHITE_LIST_URL = {
-            API_PREFIX + AUTH_ENDPOINT + "/register/user",
-            API_PREFIX + AUTH_ENDPOINT + "/authenticate"
+            AUTH_ENDPOINT + "/register/user",
+            AUTH_ENDPOINT + "/authenticate"
     };
-
 
     private EndpointConstants() {}
 }
