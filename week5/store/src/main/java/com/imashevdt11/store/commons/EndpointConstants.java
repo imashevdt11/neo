@@ -11,7 +11,11 @@ public final class EndpointConstants {
 
     public static final String[] WHITE_LIST_URL = {
             AUTH_ENDPOINT + "/register/user",
-            AUTH_ENDPOINT + "/authenticate"
+            AUTH_ENDPOINT + "/authenticate",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
     };
 
     private EndpointConstants() {}
