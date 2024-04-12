@@ -68,17 +68,18 @@ public class ProductService {
     }
 
     public ProductDto updateProduct(Long id, ProductDto productDto) {
+
         ProductDto product = getProductById(id);
 
         if (product == null) {
             throw new ProductNotFoundException("Product not found with id: " + id, HttpStatus.NOT_FOUND.value());
         }
-        product = ProductDto.builder()
-                .name(productDto.getName())
-                .price(productDto.getPrice())
-                .build();
+
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
 
         Product updatedProduct = productRepository.save(convertToProductEntity(product));
+
         return convertToProductDto(updatedProduct);
     }
 

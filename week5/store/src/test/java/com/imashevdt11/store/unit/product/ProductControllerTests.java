@@ -1,4 +1,4 @@
-package com.imashevdt11.store.controller;
+package com.imashevdt11.store.unit.product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imashevdt11.store.commons.EndpointConstants;
