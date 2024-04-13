@@ -1,4 +1,4 @@
-package com.imashevdt11.store.service;
+package com.imashevdt11.store.unit.product;
 
 import com.imashevdt11.store.dtos.ProductDto;
 import com.imashevdt11.store.entities.Product;

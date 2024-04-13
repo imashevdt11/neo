@@ -12,7 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.imashevdt11.store.entities.auth.Role.*;
+import static com.imashevdt11.store.enums.Role.*;
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(EndpointConstants.WHITE_LIST_URL).permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/products/**").hasAnyAuthority(ADMIN.name(), USER.name())
+                        .requestMatchers(HttpMethod.GET, EndpointConstants.PRODUCTS_ENDPOINT + "/**").hasAnyAuthority(ADMIN.name(), USER.name())
                         .anyRequest().hasAuthority(ADMIN.name())
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

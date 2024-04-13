@@ -1,4 +1,4 @@
-package com.imashevdt11.store.repository;
+package com.imashevdt11.store.unit.product;
 
 import com.imashevdt11.store.entities.Product;
 import com.imashevdt11.store.repositories.ProductRepository;
