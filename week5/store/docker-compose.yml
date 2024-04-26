@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: jdbc:mysql://localhost:3306/store
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: neymar11
+
+  db:
+    image: mysql:latest
+    ports:
+      - "3307:3307"
+    environment:
+      MYSQL_DATABASE: store
+      MYSQL_USER: root
+      MYSQL_PASSWORD: neymar11
+      MYSQL_ROOT_PASSWORD: neymar11
