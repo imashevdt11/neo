@@ -1,0 +1,11 @@
+1. Postman
+
+You must authenticate to program by using JWT to test endpoints.
+
+2. Integration and Unit tests
+
+Go to the src/test path and open one of the test classes. You can test each method individually or all at once.
+
+3. Terminal
+
+Run 'mvnw clean install'
